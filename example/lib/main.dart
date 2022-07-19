@@ -11,7 +11,35 @@ void main() async {
   Logger.root.onRecord.listen((record) {
     print('${format.format(record.time)}: ${record.message}');
   });
+  // Generated livekit.yaml that's suitable for local testing
+  //
+  // Start LiveKit with:
+  // docker run --rm \
+  // -p 7880:7880 \
+  // -p 7881:7881 \
+  // -p 7882:7882/udp \
+  // -v $PWD/livekit.yaml:/livekit.yaml \
+  // livekit/livekit-server \
+  // --config /livekit.yaml \
+  // --node-ip=127.0.0.1
+  //
+  // Note: --node-ip needs to be reachable by the client. 127.0.0.1 is accessible only to the current machine
+  //
+  // Server URL:  ws://localhost:7880
+  // API Key: APIdCLQLh5E8P2u
+  // API Secret: kArfeuTGLDc3WLQ7JsGu6bQTAr0CHblnURijqHgHGR5
+  //
+  // Here's a test token generated with your keys: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTQxNDIyNDEsImlzcyI6IkFQSWRDTFFMaDVFOFAydSIsImp0aSI6InRvbnlfc3RhcmsiLCJuYW1lIjoiVG9ueSBTdGFyayIsIm5iZiI6MTY1ODE0MjI0MSwic3ViIjoidG9ueV9zdGFyayIsInZpZGVvIjp7InJvb20iOiJzdGFyay10b3dlciIsInJvb21Kb2luIjp0cnVlfX0.U7XfTGkdWlcegwUJ63cNhgqfKv8ThTHDJX4iHGjq83I
+  //
+  // An access token identifies the participant as well as the room it's connecting to
 
+/*
+  docker run --rm -p 7880:7880  -p 7881:7881  -p 7882:7882/udp  -v $PWD/livekit.yaml:/livekit.yaml livekit/livekit-server \
+  --config /livekit.yaml --node-ip=192.168.1.20
+
+  Server URL:  ws://192.168.1.20:7880
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTQxNDIyNDEsImlzcyI6IkFQSWRDTFFMaDVFOFAydSIsImp0aSI6InRvbnlfc3RhcmsiLCJuYW1lIjoiVG9ueSBTdGFyayIsIm5iZiI6MTY1ODE0MjI0MSwic3ViIjoidG9ueV9zdGFyayIsInZpZGVvIjp7InJvb20iOiJzdGFyay10b3dlciIsInJvb21Kb2luIjp0cnVlfX0.U7XfTGkdWlcegwUJ63cNhgqfKv8ThTHDJX4iHGjq83I
+  */
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(const LiveKitExampleApp());

@@ -26,8 +26,8 @@ class _ConnectPageState extends State<ConnectPage> {
   static const _storeKeyDynacast = 'dynacast';
   static const _storeKeyFastConnect = 'fast-connect';
 
-  final _uriCtrl = TextEditingController();
-  final _tokenCtrl = TextEditingController();
+  final _uriCtrl = TextEditingController(text: "ws://192.168.1.20:7880");
+  final _tokenCtrl = TextEditingController(text: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTQxNDIyNDEsImlzcyI6IkFQSWRDTFFMaDVFOFAydSIsImp0aSI6InRvbnlfc3RhcmsiLCJuYW1lIjoiVG9ueSBTdGFyayIsIm5iZiI6MTY1ODE0MjI0MSwic3ViIjoidG9ueV9zdGFyayIsInZpZGVvIjp7InJvb20iOiJzdGFyay10b3dlciIsInJvb21Kb2luIjp0cnVlfX0.U7XfTGkdWlcegwUJ63cNhgqfKv8ThTHDJX4iHGjq83I");
   bool _simulcast = true;
   bool _adaptiveStream = true;
   bool _dynacast = true;
@@ -50,12 +50,16 @@ class _ConnectPageState extends State<ConnectPage> {
   // Read saved URL and Token
   Future<void> _readPrefs() async {
     final prefs = await SharedPreferences.getInstance();
-    _uriCtrl.text = const bool.hasEnvironment('URL')
+/*    _uriCtrl.text = const bool.hasEnvironment('URL')
         ? const String.fromEnvironment('URL')
         : prefs.getString(_storeKeyUri) ?? '';
     _tokenCtrl.text = const bool.hasEnvironment('TOKEN')
         ? const String.fromEnvironment('TOKEN')
-        : prefs.getString(_storeKeyToken) ?? '';
+        : prefs.getString(_storeKeyToken) ?? '';*/
+
+    _uriCtrl.text = "ws://192.168.1.20:7880";
+    _tokenCtrl.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTQxNDIyNDEsImlzcyI6IkFQSWRDTFFMaDVFOFAydSIsImp0aSI6InRvbnlfc3RhcmsiLCJuYW1lIjoiVG9ueSBTdGFyayIsIm5iZiI6MTY1ODE0MjI0MSwic3ViIjoidG9ueV9zdGFyayIsInZpZGVvIjp7InJvb20iOiJzdGFyay10b3dlciIsInJvb21Kb2luIjp0cnVlfX0.U7XfTGkdWlcegwUJ63cNhgqfKv8ThTHDJX4iHGjq83I";
+
     setState(() {
       _simulcast = prefs.getBool(_storeKeySimulcast) ?? true;
       _adaptiveStream = prefs.getBool(_storeKeyAdaptiveStream) ?? true;
