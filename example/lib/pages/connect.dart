@@ -111,12 +111,16 @@ class _ConnectPageState extends State<ConnectPage> {
             simulcast: _simulcast,
           ),
           defaultScreenShareCaptureOptions:
-              const ScreenShareCaptureOptions(useiOSBroadcastExtension: true),
+              const ScreenShareCaptureOptions(
+                  useiOSBroadcastExtension: true,
+                  params: VideoParametersPresets.screenShareH1080FPS30
+              ),
         ),
         fastConnectOptions: _fastConnect
             ? FastConnectOptions(
                 microphone: const TrackOption(enabled: true),
-                camera: const TrackOption(enabled: true),
+                camera: const TrackOption(enabled: false),
+                screen: const TrackOption(enabled: true)
               )
             : null,
       );

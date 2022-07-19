@@ -125,6 +125,7 @@ abstract class LocalTrack extends Track {
           : false,
     };
 
+    print('constraints::::>>>>${constraints}  options:${options.runtimeType}');
     final rtc.MediaStream stream;
     if (options is ScreenShareCaptureOptions) {
       stream = await rtc.navigator.mediaDevices.getDisplayMedia(constraints);

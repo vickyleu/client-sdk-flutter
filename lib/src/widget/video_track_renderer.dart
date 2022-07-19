@@ -21,8 +21,7 @@ class VideoTrackRenderer extends StatefulWidget {
   final rtc.RTCVideoViewObjectFit fit;
   final VideoViewMirrorMode mirrorMode;
 
-  const VideoTrackRenderer(
-    this.track, {
+  const VideoTrackRenderer(this.track, {
     this.fit = rtc.RTCVideoViewObjectFit.RTCVideoViewObjectFitContain,
     this.mirrorMode = VideoViewMirrorMode.auto,
     Key? key,
@@ -36,6 +35,7 @@ class _VideoTrackRendererState extends State<VideoTrackRenderer> {
   final _renderer = rtc.RTCVideoRenderer();
   bool _rendererReady = false;
   EventsListener<TrackEvent>? _listener;
+
   // Used to compute visibility information
   late GlobalKey _internalKey;
 
@@ -67,8 +67,7 @@ class _VideoTrackRendererState extends State<VideoTrackRenderer> {
       ..on<TrackStreamUpdatedEvent>((event) {
         if (!mounted) return;
         _renderer.srcObject = event.stream;
-      })
-      ..on<LocalTrackOptionsUpdatedEvent>((event) {
+      })..on<LocalTrackOptionsUpdatedEvent>((event) {
         if (!mounted) return;
         // force recompute of mirror mode
         setState(() {});
@@ -90,24 +89,8 @@ class _VideoTrackRendererState extends State<VideoTrackRenderer> {
   }
 
   @override
-  Widget build(BuildContext context) => !_rendererReady
-      ? Container()
-      : Builder(
-          key: _internalKey,
-          builder: (ctx) {
-            // let it render before notifying build
-            WidgetsBindingCompatible.instance
-                ?.addPostFrameCallback((timeStamp) {
-              widget.track.onVideoViewBuild?.call(_internalKey);
-            });
-            return rtc.RTCVideoView(
-              _renderer,
-              mirror: _shouldMirror(),
-              filterQuality: FilterQuality.medium,
-              objectFit: widget.fit,
-            );
-          },
-        );
+  Widget build(BuildContext context) =>
+      !_rendererReady ? Container() : _buildRenderer();
 
   bool _shouldMirror() {
     // on
@@ -125,5 +108,27 @@ class _VideoTrackRendererState extends State<VideoTrackRenderer> {
     }
     // default to false
     return false;
+  }
+
+  Widget _buildRenderer() {
+    return Builder(
+      key: _internalKey,
+      builder: (ctx) {
+        // let it render before notifying build
+        WidgetsBindingCompatible.instance
+            ?.addPostFrameCallback((timeStamp) {
+          widget.track.onVideoViewBuild?.call(_internalKey);
+        });
+        // return Container(
+        //   color: Colors.green,
+        // );
+        return rtc.RTCVideoView(
+          _renderer,
+          mirror: _shouldMirror(),
+          filterQuality: FilterQuality.medium,
+          objectFit: widget.fit,
+        );
+      },
+    );
   }
 }

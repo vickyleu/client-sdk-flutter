@@ -26,8 +26,11 @@ class RoomPage extends StatefulWidget {
 class _RoomPageState extends State<RoomPage> {
   //
   List<Participant> participants = [];
+
   EventsListener<RoomEvent> get _listener => widget.listener;
+
   bool get fastConnection => widget.room.engine.fastConnectOptions != null;
+
   @override
   void initState() {
     super.initState();
@@ -140,7 +143,11 @@ class _RoomPageState extends State<RoomPage> {
           children: [
             Expanded(
                 child: participants.isNotEmpty
-                    ? ParticipantWidget.widgetFor(participants.first)
+                    ? Container(
+                        decoration: const BoxDecoration(
+                            boxShadow: [BoxShadow(color: Colors.red)]),
+                        child: ParticipantWidget.widgetFor(participants.first),
+                      )
                     : Container()),
             SizedBox(
               height: 100,

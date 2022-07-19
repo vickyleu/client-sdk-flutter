@@ -59,8 +59,11 @@ abstract class _ParticipantWidgetState<T extends ParticipantWidget>
     extends State<T> {
   //
   bool _visible = true;
+
   VideoTrack? get activeVideoTrack;
+
   TrackPublication? get firstVideoPublication;
+
   TrackPublication? get firstAudioPublication;
 
   @override
@@ -115,6 +118,11 @@ abstract class _ParticipantWidgetState<T extends ParticipantWidget>
                       fit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
                     )
                   : const NoVideoWidget(),
+            ),
+
+
+            Center(
+              child: Text('${this.runtimeType}'),
             ),
 
             // Bottom bar
@@ -210,6 +218,7 @@ class _RemoteParticipantWidgetState
 class RemoteTrackPublicationMenuWidget extends StatelessWidget {
   final IconData icon;
   final RemoteTrackPublication pub;
+
   const RemoteTrackPublicationMenuWidget({
     required this.pub,
     required this.icon,
