@@ -13,19 +13,24 @@ dependencies:
     sdk: flutter
   flutter:
     sdk: flutter
-  async: ^2.8.2
+  async: ^2.9.0
   collection: ^1.16.0
   fixnum: ^1.0.1
-  meta: ^1.7.0
+  meta: ^1.8.0
   http: ^0.13.4
   logging: ^1.0.2
   uuid: ^3.0.6
   synchronized: ^3.0.0+2
-  protobuf: ^2.0.1
+  protobuf: ^2.1.0
   flutter_webrtc:
     git: https://github.com/flutter-webrtc/flutter-webrtc.git
   dart_webrtc: ^1.0.6
-  device_info_plus: ^3.2.3
+  device_info_plus: ^4.0.1
+
+
+dependency_overrides:
+  meta: ^1.8.0
+  async: ^2.9.0
 
 dev_dependencies:
   flutter_test:
