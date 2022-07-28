@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_background/flutter_background.dart';
 import 'package:livekit_example/theme.dart';
 import 'package:logging/logging.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'pages/connect.dart';
 
 void main() async {
@@ -11,6 +13,15 @@ void main() async {
   Logger.root.onRecord.listen((record) {
     print('${format.format(record.time)}: ${record.message}');
   });
+
+
+  WidgetsFlutterBinding.ensureInitialized();
+  if (WebRTC.platformIsAndroid) {
+    await startForegroundService();
+  }
+  runApp(const LiveKitExampleApp());
+
+
   // Generated livekit.yaml that's suitable for local testing
   //
   // Start LiveKit with:
@@ -52,9 +63,20 @@ Lenovo :::Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjA3ODkzMjksIm
 MacMini :::Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjA3ODkzNjAsImlzcyI6IkFQSWRDTFFMaDVFOFAydSIsIm5iZiI6MTY1ODE5NzM2MCwic3ViIjoiTWFjIG1pbmkiLCJ2aWRlbyI6eyJyb29tIjoi5Zeo5ZeoIiwicm9vbUpvaW4iOnRydWV9fQ.BR5MijOjfRdLzCRiwQ001fn4TA1XaC3_U_RlM5Vs99c
 
   */
-  WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(const LiveKitExampleApp());
+}
+
+Future<bool> startForegroundService() async {
+  const androidConfig = FlutterBackgroundAndroidConfig(
+    notificationTitle: 'Title of the notification',
+    notificationText: 'Text of the notification',
+    notificationImportance: AndroidNotificationImportance.Default,
+    notificationIcon: AndroidResource(
+        name: 'background_icon',
+        defType: 'drawable'), // Default is ic_launcher from folder mipmap
+  );
+  await FlutterBackground.initialize(androidConfig: androidConfig);
+  return FlutterBackground.enableBackgroundExecution();
 }
 
 class LiveKitExampleApp extends StatelessWidget {
