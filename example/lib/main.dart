@@ -34,13 +34,13 @@ void main() async {
   // An access token identifies the participant as well as the room it's connecting to
 
 /*
-  docker run --rm -p 7880:7880  -p 7881:7881  -p 7882:7882/udp  -v $PWD/livekit.yaml:/livekit.yaml livekit/livekit-server \
-  --config /livekit.yaml --node-ip=192.168.1.20
+  docker run -d --rm -p 7880:7880  -p 7881:7881  -p 7882:7882/udp  -v $PWD/livekit.yaml:/livekit.yaml livekit/livekit-server \
+  --config /livekit.yaml --node-ip=192.168.1.56
 
-  Server URL:  ws://192.168.1.20:7880
+  Server URL:  ws://192.168.1.56:7880
   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTQxNDIyNDEsImlzcyI6IkFQSWRDTFFMaDVFOFAydSIsImp0aSI6InRvbnlfc3RhcmsiLCJuYW1lIjoiVG9ueSBTdGFyayIsIm5iZiI6MTY1ODE0MjI0MSwic3ViIjoidG9ueV9zdGFyayIsInZpZGVvIjp7InJvb20iOiJzdGFyay10b3dlciIsInJvb21Kb2luIjp0cnVlfX0.U7XfTGkdWlcegwUJ63cNhgqfKv8ThTHDJX4iHGjq83I
 
-ws://192.168.1.20:7880
+ws://192.168.1.56:7880
   docker run --rm -e LIVEKIT_KEYS="APIdCLQLh5E8P2u: kArfeuTGLDc3WLQ7JsGu6bQTAr0CHblnURijqHgHGR5" \
     livekit/livekit-server create-join-token \
     --room "嗨嗨"  --identity "Mac mini"

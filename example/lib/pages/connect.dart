@@ -26,7 +26,7 @@ class _ConnectPageState extends State<ConnectPage> {
   static const _storeKeyDynacast = 'dynacast';
   static const _storeKeyFastConnect = 'fast-connect';
 
-  final _uriCtrl = TextEditingController(text: "ws://192.168.1.20:7880");
+  final _uriCtrl = TextEditingController(text: "ws://192.168.1.56:7880");
   final _tokenCtrl = TextEditingController(text: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTQxNDIyNDEsImlzcyI6IkFQSWRDTFFMaDVFOFAydSIsImp0aSI6InRvbnlfc3RhcmsiLCJuYW1lIjoiVG9ueSBTdGFyayIsIm5iZiI6MTY1ODE0MjI0MSwic3ViIjoidG9ueV9zdGFyayIsInZpZGVvIjp7InJvb20iOiJzdGFyay10b3dlciIsInJvb21Kb2luIjp0cnVlfX0.U7XfTGkdWlcegwUJ63cNhgqfKv8ThTHDJX4iHGjq83I");
   bool _simulcast = true;
   bool _adaptiveStream = true;
@@ -57,7 +57,7 @@ class _ConnectPageState extends State<ConnectPage> {
         ? const String.fromEnvironment('TOKEN')
         : prefs.getString(_storeKeyToken) ?? '';*/
 
-    _uriCtrl.text = "ws://192.168.1.20:7880";
+    _uriCtrl.text = "ws://192.168.1.56:7880";
     // _tokenCtrl.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTQxNDIyNDEsImlzcyI6IkFQSWRDTFFMaDVFOFAydSIsImp0aSI6InRvbnlfc3RhcmsiLCJuYW1lIjoiVG9ueSBTdGFyayIsIm5iZiI6MTY1ODE0MjI0MSwic3ViIjoidG9ueV9zdGFyayIsInZpZGVvIjp7InJvb20iOiJzdGFyay10b3dlciIsInJvb21Kb2luIjp0cnVlfX0.U7XfTGkdWlcegwUJ63cNhgqfKv8ThTHDJX4iHGjq83I";
     _tokenCtrl.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjA3ODkzNjAsImlzcyI6IkFQSWRDTFFMaDVFOFAydSIsIm5iZiI6MTY1ODE5NzM2MCwic3ViIjoiTWFjIG1pbmkiLCJ2aWRlbyI6eyJyb29tIjoi5Zeo5ZeoIiwicm9vbUpvaW4iOnRydWV9fQ.BR5MijOjfRdLzCRiwQ001fn4TA1XaC3_U_RlM5Vs99c";
 
@@ -113,14 +113,14 @@ class _ConnectPageState extends State<ConnectPage> {
           defaultScreenShareCaptureOptions:
               const ScreenShareCaptureOptions(
                   useiOSBroadcastExtension: true,
-                  params: VideoParametersPresets.screenShareH1080FPS30
+                  params: VideoParametersPresets.screenShareH720FPS15
               ),
         ),
         fastConnectOptions: _fastConnect
             ? FastConnectOptions(
                 microphone: const TrackOption(enabled: true),
                 camera: const TrackOption(enabled: false),
-                screen: const TrackOption(enabled: true)
+                screen: const TrackOption(enabled: false)
               )
             : null,
       );

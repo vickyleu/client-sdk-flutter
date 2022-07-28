@@ -22,8 +22,8 @@ dependencies:
   uuid: ^3.0.6
   synchronized: ^3.0.0+2
   protobuf: ^2.1.0
-  flutter_webrtc: #^0.8.12
-    path: /Users/vickyleu/Develop/GitRepo/flutter-webrtc
+  flutter_webrtc: ^0.9.0
+#    path: /Users/vickyleu/Develop/GitRepo/flutter-webrtc
 
   dart_webrtc: ^1.0.6
   device_info_plus: ^4.0.1
